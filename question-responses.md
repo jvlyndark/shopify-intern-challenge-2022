@@ -16,11 +16,9 @@
 1. How many orders were shipped by Speedy Express in total?
     1. 54
     2. Query: SELECT COUNT(OrderID) AS 'Orders shipped by Speedy Express' FROM Orders WHERE ShipperID IN (SELECT ShipperID FROM Shippers WHERE ShipperName='Speedy Express');
-
 2. What is the last name of the employee with the most orders?
   1. Peacock
   2. Query: SELECT LastName FROM Employees WHERE EmployeeID IN (SELECT EmployeeID FROM Orders GROUP BY EmployeeID ORDER BY COUNT(OrderID) DESC LIMIT 1);
-
 3. What product was ordered the most by customers in Germany?
   1. ProductID 40 - Boston Crab Meat, quantity: 140
   2. Query: SELECT ProductName FROM Products WHERE ProductID IN (SELECT ProductID FROM OrderDetails WHERE OrderID IN (SELECT OrderID FROM Orders Where CustomerID IN (SELECT CustomerID FROM ORDERS WHERE CustomerID IN (SELECT CustomerID FROM Customers WHERE Country='Germany'))) GROUP BY Quantity ORDER BY SUM(Quantity) DESC LIMIT 1);
